@@ -10,30 +10,31 @@ using namespace std;
 class Solution{
 public:
     vector<int> nextPermutation(int n, vector<int> arr){
-        // code here
+        // code here  //step 1 traverse from back and find first arr[i]<arr[i+1]
         int pivot=-1;
         for(int i=n-2;i>=0;i--){
-            if(arr[i]<arr[i+1]) {
+            if(arr[i]<arr[i+1]){
                 pivot=i;
-                // cout<<pivot<<"pivot "<<endl;
                 break;
             }
         }
+        // cout<<pivot<<" pivot"<<endl;
         if(pivot==-1){
-            for(int i=0;i<n/2;i++){
-                swap(arr[i],arr[n-i-1]);
+            reverse(arr.begin(),arr.end());
+            return arr;
+        }
+        // step 2 now once again traverse from back find first arr[i]>arr[pivot]
+        int big=0;
+        for(int i=n-1;i>=pivot;i--){
+            if(arr[i]>arr[pivot]){
+                big=i;
+                break;
             }
         }
-        else{
-            for(int i=n-1;i>pivot;i--){
-                if(arr[i]>arr[pivot]){
-                    // cout<<i<<"succ"<<endl;
-                    swap(arr[i],arr[pivot]);
-                    break;
-                }
-            }
-            reverse(arr.begin()+pivot+1,arr.end());
-        }
+        //step 3 swap arr[pivot] and arr[index]
+        swap(arr[pivot],arr[big]);
+        // step 4 reverse fron pivot +1 to end
+        reverse(arr.begin()+pivot+1,arr.end());
         return arr;
     }
 };
