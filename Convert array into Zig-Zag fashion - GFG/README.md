@@ -6,7 +6,7 @@
 <p><span style="font-size:18px"><strong>arr[0] &lt; arr[1] &nbsp;&gt; arr[2] &lt; arr[3] &gt; arr[4] &lt; . . . . arr[n-2] &lt; arr[n-1] &gt; arr[n]</strong>.&nbsp;</span></p>
 </blockquote>
 
-<p><span style="font-size:18px"><strong>NOTE:</strong> In the mentioned complexity, only a unique solution will exist and You need to modify the array in-place.</span></p>
+<p><span style="font-size:18px"><strong>NOTE:&nbsp;</strong>If your transformation is correct, the output will be 1 else the output will be 0.&nbsp;</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
@@ -32,8 +32,8 @@ You don't need to read input or print anything. Your task is to complete the fun
 <strong>Expected Auxiliary Space:</strong>&nbsp;O(1)</span></p>
 
 <p><span style="font-size:18px"><strong>Constraints:</strong><br>
-1 &lt;= N &lt;= 10<sup>5</sup><br>
-0 &lt;= Arr<sub>i</sub> &lt;= 10<sup>6</sup></span></p>
+1 &lt;= N &lt;= 10<sup>6</sup><br>
+0 &lt;= Arr<sub>i</sub> &lt;= 10<sup>9</sup></span></p>
 
 <p>&nbsp;</p>
 </div>
