@@ -21,11 +21,11 @@ class Solution{
     	int mu=arr[maxi]+1;
     	for(int i=0;i<n;i++){
     	    if(i%2==0){
-    	        arr[i]+=(arr[maxi]%mu)*mu;
+    	        arr[i]=arr[i]+(arr[maxi]%mu)*mu;
     	        maxi--;
     	    }
     	    else{
-    	        arr[i]+=(arr[mini]%mu)*mu;
+    	        arr[i]=arr[i]+(arr[mini]%mu)*mu;
     	        mini++;
     	    }
     	}
