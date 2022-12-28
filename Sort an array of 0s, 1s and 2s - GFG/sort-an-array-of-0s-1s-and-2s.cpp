@@ -11,20 +11,28 @@ class Solution
     void sort012(int arr[], int n)
     {
         // code here 
-        int low=0,mid=0,high=n-1;
-        while(mid<=high){
-            if(arr[mid]==0){
-                swap(arr[low++],arr[mid++]);
+        int zc=0,oc=0,tc=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]==0) zc++;
+            else if(arr[i]==1) oc++;
+            else tc++;
+        }
+        // cout<<zc<<"-0s "<<oc<<"-1s "<<tc<<"-2s"<<endl;
+        for(int i=0;i<n;i++){
+            if(zc>0){
+                arr[i]=0;
+                zc--;
             }
-            else if(arr[mid]==1){
-                mid++;
+            else if(oc>0 && zc==0){
+                arr[i]=1;
+                oc--;
             }
-            else{
-                swap(arr[mid],arr[high]);
-                high--;
+            else if(oc==0 && tc>0){
+                arr[i]=2;
+                tc--;
             }
         }
-        return ;
+        return;
     }
     
 };
