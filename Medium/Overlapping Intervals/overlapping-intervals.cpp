@@ -6,10 +6,7 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> overlappedInterval(vector<vector<int>>& intervals) {
-         // Code here
-         // 1-3 2-4 6-8 9-10
-         // 1-4 6-8 9-10
-         int n=intervals.size();
+        int n=intervals.size();
          vector<vector<int>>ans;
          sort(intervals.begin(),intervals.end());
          int left=intervals[0][0];
@@ -26,6 +23,24 @@ public:
          }
          ans.push_back({left,right});
          return ans;
+         // Code here
+        //  int n=intervals.size();
+        //  int left=intervals[0][0];
+        //  int right=intervals[0][1];
+        //  vector<vector<int>>ans;
+        //  sort(intervals.begin(),intervals.end());
+        //  for(int i=1;i<n;i++){
+        //      if(intervals[i][0]<=right){
+        //          right=max(intervals[i][1],right);
+        //      }
+        //      else{
+        //          ans.push_back({left,right});
+        //          left=intervals[i][0];
+        //          right=intervals[i][1];
+        //      }
+        //  }
+        //  ans.push_back({left,right});
+        //  return ans;
     }
 };
 
