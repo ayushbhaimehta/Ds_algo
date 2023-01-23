@@ -12,10 +12,9 @@ public:
     vector<int> nextPermutation(int n, vector<int> arr){
         // code here
         // 1 2 3 6 5 4
-        // step 1 find the pivot
-        int pivot=-1;        
+        int pivot=-1;
         for(int i=n-2;i>=0;i--){
-            if(arr[i]<arr[i+1]) {
+            if(arr[i]<arr[i+1]){
                 pivot=i;
                 break;
             }
@@ -26,7 +25,8 @@ public:
             }
         }
         else{
-            for(int i=n-1;i>pivot;i--){
+            int index=pivot+1;
+            for(int i=n-1;i>=index;i--){
                 if(arr[i]>arr[pivot]){
                     swap(arr[i],arr[pivot]);
                     break;
