@@ -1,21 +1,19 @@
 class Solution {
 public:
-    int findDuplicate(vector<int>& nums) {
-         int tortoise = nums[0];
-        int hare = nums[0];
-
+    int findDuplicate(vector<int>& arr) {
+        int slow= arr[0],fast=slow;
+        
         do {
-            tortoise = nums[tortoise];
-            hare = nums[nums[hare]];
-        } while (tortoise != hare);
-
-        // Find the "entrance" to the cycle.
-        tortoise = nums[0];
-        while (tortoise != hare) {
-            tortoise = nums[tortoise];
-            hare = nums[hare];
+            slow= arr[slow];
+            fast=arr[arr[fast]];
+        }while(slow!=fast);
+        
+        fast=arr[0];
+        while(slow!=fast){
+            slow=arr[slow];
+            fast=arr[fast];
         }
-
-        return hare;
+        
+        return slow;
     }
 };
