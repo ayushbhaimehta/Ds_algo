@@ -47,17 +47,27 @@ class Solution
     int findFirstNode(Node* head)
     {
         // your code here
-        Node *curr=head;
-        unordered_map<Node*,int>um;
-        // bool flag=false;
-        while(curr!=NULL){
-            if(um.find(curr)!=um.end()){
-                return curr->data;
+        Node *fast = head;
+        Node *slow = head;
+        
+        if(head == NULL || head->next == NULL) return -1;
+        bool isCycle = false;
+        while(fast && slow){
+            slow = slow->next;
+            if(fast->next == NULL)return -1;
+            fast = fast->next->next;
+            if(fast==slow){
+                isCycle = true;
+                break;
             }
-            um[curr]++;
-            curr=curr->next;
         }
-        return -1;
+        if(!isCycle) return -1;
+        slow=head;
+        while(fast!=slow){
+            fast = fast->next;
+            slow = slow->next;
+        }
+        return fast->data;
     }
 };
 
