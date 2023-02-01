@@ -8,56 +8,45 @@ using namespace std;
 class Solution
 {
   public:
-  vector<vector<int>> v;
-  vector<int> vis,par,tmp;
-  long long dfs(int node,int p=-1){
-    vis[node]=1;
-    par[node]=p;
-    tmp.push_back(node);
-    for(auto i:v[node]){
-      if(vis[i]==0){
-        long long z=dfs(i,node);
-        if(z!=-1){
-          return z;
-        }
-      }
-      else if(vis[i]==1){
-        long long sum=i;
-        while(node!=i){
-          sum+=node;
-          node=par[node];
-        }
-        if(node==i)
-          return sum;
-        return -1;
-      }
-    }
-    return -1;
-  }
-  long long largestSumCycle(int N, vector<int> Edge)
+  long long largestSumCycle(int n, vector<int> edge)
   {
-    long long ans=-1;
-    vis=vector<int>(N);
-    v=vector<vector<int>>(N);
-    par=vector<int>(N);
-
-    for(int i=0;i<N;i++){
-      if(Edge[i]!=-1){
-        v[i].push_back(Edge[i]);
-      }
-    }
-
-    for(int i=0;i<N;i++){
-      if(!vis[i]){
-        ans=max(ans,dfs(i));
-        for(auto j:tmp){
-          vis[j]=2;
+    vector<int> indegree(n, 0);
+        for(auto it: edge) {
+            if(it == -1) continue;
+            indegree[it]++;
         }
-        tmp.clear();
-      }
-    }
-
-    return ans;
+        
+        queue<int> q;
+        vector<int> vis(n, false);
+        for(int i = 0; i < n; i++) {
+            if(indegree[i] == 0) {
+                vis[i] = true;
+                q.push(i);
+            }
+        }
+        
+        while(q.empty() == false) {
+            int curr = q.front(); q.pop();
+            int par = edge[curr];
+            if(par == -1) continue;
+            
+            if(--indegree[par] == 0) {
+                q.push(par);
+                vis[par] = true;
+            }
+        }
+        
+        int res = -1;
+        for(int i = 0; i < n; i++) {
+            if(vis[i]) continue;
+            int val = 0;
+            for(int st = i; vis[st] == false; st = edge[st]) {
+                val += st;
+                vis[st] = true;
+            }
+            res = max(res, val);
+        }
+        return res;
   }
 };
 
