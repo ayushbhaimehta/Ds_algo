@@ -11,14 +11,12 @@ class Solution{
         { 
             // code here 
             int i=n-1,j=0;
-            while(i>=0 && j<m){
-                if(arr1[i]>arr2[j]){
-                    swap(arr1[i],arr2[j]);
+            while(i>=0 &&j<m){
+                if(arr2[j]>arr1[i]) break;
+                else{
+                    swap(arr2[j],arr1[i]);
                     i--;
                     j++;
-                }
-                else{
-                    break;
                 }
             }
             sort(arr1,arr1+n);
