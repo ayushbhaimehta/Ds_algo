@@ -11,7 +11,6 @@ class Solution{
 public:
     vector<int> nextPermutation(int n, vector<int> arr){
         // code here
-        // 1 2 3 6 5 4
         int pivot=-1;
         for(int i=n-2;i>=0;i--){
             if(arr[i]<arr[i+1]){
@@ -19,21 +18,19 @@ public:
                 break;
             }
         }
+        
         if(pivot==-1){
-            for(int i=0;i<n/2;i++){
-                swap(arr[i],arr[n-i-1]);
+            reverse(arr.begin(),arr.end());
+            return arr;
+        }
+        
+        for(int i=n-1;i>pivot;i--){
+            if(arr[i]>arr[pivot]){
+                swap(arr[i],arr[pivot]);
+                break;
             }
         }
-        else{
-            int index=pivot+1;
-            for(int i=n-1;i>=index;i--){
-                if(arr[i]>arr[pivot]){
-                    swap(arr[i],arr[pivot]);
-                    break;
-                }
-            }
-            reverse(arr.begin()+pivot+1,arr.end());
-        }
+        reverse(arr.begin()+pivot+1,arr.end());
         return arr;
     }
 };
