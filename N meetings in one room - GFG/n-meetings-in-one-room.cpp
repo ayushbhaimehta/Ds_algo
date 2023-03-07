@@ -7,6 +7,7 @@ class Solution
 {
     public:
     
+    
     struct meet{
         int start;
         int end;
