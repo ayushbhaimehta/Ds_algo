@@ -14,26 +14,25 @@ class Solution
     int celebrity(vector<vector<int> >& arr, int n) 
     {
         // code here 
-        vector<bool>flag(n,1);
         for(int i=0;i<n;i++){
+            bool flag=true;
             for(int j=0;j<n;j++){
                 if(arr[i][j]==1){
-                    flag[i]=0;
+                    flag=0;
+                    break;
                 }
             }
-        }
-        
-        for(int i=0;i<n;i++){
-            if(flag[i]==1){
-                bool check=true;
+            
+            if(flag){
+                bool check=1;
                 for(int j=0;j<n;j++){
-                    if(j==i) continue;
-                    if(arr[j][i]!=1){
-                        check=false;
+                    if(i==j) continue;
+                    if(arr[j][i]==0) {
+                        check=0;
+                        break;
                     }
                 }
-                
-                if(check==true) return i;
+                if(check) return i;
             }
         }
         
