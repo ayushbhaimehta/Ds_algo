@@ -26,8 +26,18 @@ int f(int i,int *arr,vector<int>&dp){
 	// calculate the maximum sum with out adjacent
 	int findMaxSum(int *arr, int n) {
 	    // code here
-	    vector<int>dp(n,-1);
-	    return f(n-1,arr,dp);
+	    vector<int>dp(n,0);
+	    dp[0]=arr[0];
+	    dp[1]=0;
+	    //
+	    for(int i=1;i<n;i++){
+	        
+	        int take=take=dp[i-2]+arr[i];
+            int notTake=dp[i-1];
+            
+            dp[i]=max(take,notTake);
+	    }
+	    return dp[n-1];
 	}
 };
 
