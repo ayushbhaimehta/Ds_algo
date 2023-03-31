@@ -26,8 +26,17 @@ class Solution {
   
     int minimumEnergy(vector<int>& arr, int n) {
         // Code here
-        vector<int>dp(n,-1);
-        return minimumEnergyUtill(arr,n-1,dp);
+        vector<int>dp(n,0);
+        dp[0]=0;
+        dp[1]=abs(arr[1]-arr[0]);
+        for(int i=2;i<n;i++){
+            
+            int left=abs(arr[i]-arr[i-1])+dp[i-1];
+            int right=abs(arr[i]-arr[i-2])+dp[i-2];
+            
+            dp[i]=min(left,right);
+        }
+        return dp[n-1];
     }
 };
 
