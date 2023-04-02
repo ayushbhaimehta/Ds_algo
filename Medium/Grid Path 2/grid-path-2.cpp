@@ -21,8 +21,22 @@ class Solution {
     int totalWays(int n, int m, vector<vector<int>>& arr) {
         // Code here
         int mod=1e9+7;
-        vector<vector<int>>dp(n,vector<int>(m,-1));
-        return f(n-1,m-1,arr,dp,mod);
+        vector<vector<int>>dp(n,vector<int>(m,0));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(i==0 && j==0){
+                    if(arr[i][j]!=1) dp[i][j]=1;
+                }
+                else{
+                    int up=0,left=0;
+                    if(i>0 && arr[i][j]!=1) up=dp[i-1][j]%mod;
+                    if(j>0 && arr[i][j]!=1) left=dp[i][j-1]%mod;
+      
+                    dp[i][j]=(left+up)%mod;
+                }
+            }
+        }
+        return dp[n-1][m-1];
     }
 };
 
