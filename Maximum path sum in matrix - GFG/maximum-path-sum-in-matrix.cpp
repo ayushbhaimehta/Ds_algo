@@ -32,9 +32,22 @@ int f(int i,int j,vector<vector<int>>&arr,vector<vector<int>>&dp){
         // code here
         int sum=0;
         int m=arr[0].size();
-        vector<vector<int>>dp(n,vector<int>(m,-1));
+        vector<vector<int>>dp(n,vector<int>(m,0));
         for(int i=0;i<n;i++){
-            sum=max(sum,f(n-1,i,arr,dp));
+            dp[0][i]=arr[0][i];
+            sum=max(sum,dp[0][i]);
+        }
+        for(int i=1;i<n;i++){
+            for(int j=0;j<n;j++){
+                
+                int up=-1e9,ld=-1e9,rd=-1e9;
+                if(i>0) up=arr[i][j]+dp[i-1][j];
+                if(j>0) ld=arr[i][j]+dp[i-1][j-1];
+                if(j<n-1) rd=arr[i][j]+dp[i-1][j+1];
+    
+                dp[i][j]=max(up,max(ld,rd));
+                sum=max(sum,dp[i][j]);
+            }
         }
         return sum;
     }
