@@ -6,41 +6,25 @@ using namespace std;
 class Solution {
   public:
   
-  int f(int i,int j, vector<vector<int>>& arr,vector<vector<int>>dp){
-      int n=arr.size();
+  int f(int i,int j, vector<vector<int>>& arr,vector<vector<int>>&dp,int n){
+
       
       //base conditions
-      if(i==n-1){
-          return arr[i][j];
-      }
+  if(i==n-1) return arr[i][j];
       
       if(dp[i][j]!=-1) return dp[i][j];
       
-      int down=arr[i][j]+f(i+1,j,arr,dp);
-      int right=arr[i][j]+f(i+1,j+1,arr,dp);
+      int right=arr[i][j]+f(i+1,j+1,arr,dp,n);
+      int down =arr[i][j]+f(i+1,j  ,arr,dp,n);
       
       return dp[i][j]=min(right,down);
   }
-  
-  int minimumPathSumUtil(int i, int j, vector<vector<int> > &triangle,int n, 
-vector<vector<int> > &dp) {
-  
-  if(dp[i][j]!=-1)
-  return dp[i][j];
-  
-  if(i==n-1) return triangle[i][j];
-    
-  int down = triangle[i][j]+minimumPathSumUtil(i+1,j,triangle,n,dp);
-  int diagonal = triangle[i][j]+minimumPathSumUtil(i+1,j+1,triangle,n,dp);
-  
-  return dp[i][j] = min(down, diagonal);
-  
-}
+
   
     int minimizeSum(int n, vector<vector<int>>& arr) {
         // Code here
         vector<vector<int> > dp(n,vector<int>(n,-1));
-    return minimumPathSumUtil(0,0,arr,n,dp);
+        return f(0,0,arr,dp,n);
     }
 };
 
