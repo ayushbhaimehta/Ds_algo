@@ -28,13 +28,26 @@ class Solution
     // values[] = {1,2,3}
     // weight[] = {4,5,6}
     //Function to return max value that can be put in knapsack of capacity W.
-    int knapSack(int W, int wt[], int val[], int n) 
+    int knapSack(int lim, int wt[], int val[], int n) 
     { 
-       // Your code here
-       vector<vector<int>>dp(n,vector<int>(W+1,-1));
-       return f(n-1,W,wt,val,dp);
+        // Your code here
+        vector<vector<int>>dp(n,vector<int>(lim+1,0));
+        for(int w=0;w<=lim;w++){
+            if(wt[0]<=w) dp[0][w]=val[0];
+        }
+       
+        for(int i=1;i<n;i++){
+            for(int W=0;W<=lim;W++){
+                int notTake=dp[i-1][W];
+                int take=0;
+                if(wt[i]<=W) take=val[i]+dp[i-1][W-wt[i]];
+            
+                dp[i][W]=max(take,notTake);
+            }
+        }
+        return dp[n-1][lim];
     }
-};
+};  
 
 //{ Driver Code Starts.
 
