@@ -10,28 +10,28 @@ using namespace std;
 class Solution{   
 public:
 
-bool isSubsetSumUtill(vector<int>&arr,int i,int target,vector<vector<int>>&dp){
-        if(target==0) return true;
-        if(i==0) return (arr[0]==target);
-        
-        if(dp[i][target]!=-1) return dp[i][target];
-        
-        bool notTake= isSubsetSumUtill(arr,i-1,target,dp);
-        
-        bool take=false;
-        if(target>=arr[i]){
-            take=isSubsetSumUtill(arr,i-1,target-arr[i],dp);
-        }
-        return dp[i][target]=max(take,notTake);
+bool f(int i,vector<int>&arr,int k,vector<vector<int>>&dp){
+    // base condition
+    if(k==0) return 1;
+    if(i==0){
+        if(arr[i]==k) return true;
+        else return false;
     }
-
-
+    
+    if(dp[i][k]!=-1) return dp[i][k];
+    
+    bool take=0;
+    if(arr[i]<=k) take=f(i-1,arr,k-arr[i],dp);
+    bool notTake=f(i-1,arr,k,dp);
+    
+    return dp[i][k]=max(take,notTake);
+} 
 
     bool isSubsetSum(vector<int>arr, int sum){
-        // code here
-        int n= arr.size();
-        vector<vector<int>>dp (n+1,vector<int>(sum+1,-1));
-        return isSubsetSumUtill(arr,n-1,sum,dp);
+        // code here 
+        int n=arr.size();
+        vector<vector<int>>dp(n,vector<int>(sum+1,-1));
+        return f(n-1,arr,sum,dp);
     }
 };
 
