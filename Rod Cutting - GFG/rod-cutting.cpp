@@ -30,11 +30,27 @@ class Solution{
       return dp[i][length]=max(take,notTake);
   }
   
-    int cutRod(int price[], int n) {
+    int cutRod(int arr[], int n) {
         //code here
         if(n==0) return 0;
-        vector<vector<int>>dp(n,vector<int>(n+1,-1));
-        return f(n-1,n,price,dp);
+        vector<vector<int>>dp(n,vector<int>(n+1,0));
+        for(int length=0;length<=n;length++){
+            dp[0][length]=length*arr[0];
+        }
+        
+        for(int i=1;i<n;i++){
+            for(int length=0;length<=n;length++){
+                int notTake=dp[i-1][length];
+                int take=INT_MIN;
+                if(i+1<=length){
+                    take=arr[i]+dp[i][length-(i+1)];
+                }
+      
+                dp[i][length]=max(take,notTake);
+            }
+        }
+        
+        return dp[n-1][n];
     }
 };
 
